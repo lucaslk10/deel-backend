@@ -1,0 +1,17 @@
+import { Router } from 'express';
+import { ContractController } from '@controllers/contract.controller';
+import { Routes } from '@interfaces/routes.interface';
+
+export class UserRoute implements Routes {
+  public path = '/contracts';
+  public router = Router();
+  public contract = new ContractController();
+
+  constructor() {
+    this.initializeRoutes();
+  }
+
+  private initializeRoutes() {
+    this.router.get(`${this.path}/:id`, this.contract.getContractById);
+  }
+}
