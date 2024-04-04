@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { ContractController } from '@controllers/contract.controller';
 import { Routes } from '@interfaces/routes.interface';
+import { AuthMiddleware } from '@/middlewares/auth.middleware';
 
 export class UserRoute implements Routes {
   public path = '/contracts';
@@ -12,6 +13,6 @@ export class UserRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}/:id`, this.contract.getContractById);
+    this.router.get(`${this.path}/:id`, AuthMiddleware, this.contract.getContractById);
   }
 }
