@@ -3,7 +3,7 @@ import { ContractController } from '@controllers/contract.controller';
 import { Routes } from '@interfaces/routes.interface';
 import { AuthMiddleware } from '@/middlewares/auth.middleware';
 
-export class UserRoute implements Routes {
+export class ContractRoute implements Routes {
   public path = '/contracts';
   public router = Router();
   public contract = new ContractController();
