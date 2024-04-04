@@ -16,4 +16,13 @@ export class ContractController {
       next(error);
     }
   };
+
+  public listNonTerminatedContracts = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const contracts = await this.contract.listNonTerminatedContracts();
+      res.status(200).json(contracts);
+    } catch (error) {
+      next(error);
+    }
+  };
 }

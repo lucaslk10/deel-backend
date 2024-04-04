@@ -14,5 +14,6 @@ export class ContractRoute implements Routes {
 
   private initializeRoutes() {
     this.router.get(`${this.path}/:id`, AuthMiddleware, this.contract.getContractById);
+    this.router.get(`${this.path}`, AuthMiddleware, this.contract.listNonTerminatedContracts);
   }
 }
