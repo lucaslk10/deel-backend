@@ -15,10 +15,11 @@ export const AuthMiddleware = async (req, res: Response, next: NextFunction) => 
 
     if (!Authorization) next(new HttpException(404, 'Authentication token missing'));
 
-    const profile = await Profile.findOne({ where: { id: Authorization || 0 } });
-    if (!profile) return next(new HttpException(401, 'Wrong authentication token'));
+    const profile: Profile = await Profile.findOne({ where: { id: Authorization || 0 } });
+    const profileId = profile?.id || profile?.dataValues?.id;
+    if (!profileId) return next(new HttpException(401, 'Wrong authentication token'));
 
-    req.profile = profile;
+    req.profile = profileId;
     next();
   } catch (error) {
     next(new HttpException(401, 'Wrong authentication token'));
