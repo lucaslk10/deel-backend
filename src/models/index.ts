@@ -52,6 +52,7 @@ class Contract extends Model<ContractInterface, ContractCreationAttributes> impl
   public id?: number; // Non-optional attributes are marked with '!'
   public terms: string;
   public status: 'new' | 'in_progress' | 'terminated';
+  ContractorId?: number;
 
   // Timestamps
   public readonly createdAt!: string;
