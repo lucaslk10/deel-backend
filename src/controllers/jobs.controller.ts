@@ -13,4 +13,16 @@ export class JobsController {
       next(error);
     }
   };
+
+  public payForJob = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const clientId = (req as any).profile;
+      const { job_id } = req.params;
+
+      await this.jobService.payForJob(job_id as any, clientId);
+      res.status(200).json({ message: 'success' });
+    } catch (error) {
+      next(error);
+    }
+  };
 }

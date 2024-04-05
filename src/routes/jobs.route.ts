@@ -14,5 +14,6 @@ export class JobRoute implements Routes {
 
   private initializeRoutes() {
     this.router.get(`${this.path}/unpaid`, AuthMiddleware, this.jobsController.getUnpaidJobs);
+    this.router.post(`${this.path}/:job_id/pay`, AuthMiddleware, this.jobsController.payForJob);
   }
 }
