@@ -23,4 +23,25 @@ export class AdminController {
       next(error);
     }
   };
+
+  public findBestClients = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      let { start, end, limit } = req.query;
+
+      if (!start || !end) {
+        return res.status(400).send({ message: 'Start and end dates are required.' });
+      }
+
+      limit = Number(limit || 2) as any;
+
+      // we may want to consider using utc times for dealing with different time zones
+      start = moment(start as string, 'YYYY-MM-DD').format('YYYY-MM-DD');
+      end = moment(end as string, 'YYYY-MM-DD').format('YYYY-MM-DD');
+
+      const result = await this.adminService.findBestClients(start as string, end as string, limit as any);
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  };
 }

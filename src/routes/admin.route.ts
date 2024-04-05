@@ -14,6 +14,6 @@ export class AdminRoute implements Routes {
 
   private initializeRoutes() {
     this.router.get(`${this.path}/best-profession`, AuthMiddleware, this.adminController.findBestProfession);
-    // this.router.get(`${this.path}/best-clients`, AuthMiddleware, this.balanceController.bestClients);
+    this.router.get(`${this.path}/best-clients`, AuthMiddleware, this.adminController.findBestClients);
   }
 }
