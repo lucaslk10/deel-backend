@@ -16,7 +16,7 @@ export class JobsController {
 
   public payForJob = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const clientId = (req as any).profile;
+      const clientId = (req as any).profile.id;
       const { job_id } = req.params;
 
       await this.jobService.payForJob(job_id as any, clientId);

@@ -9,7 +9,8 @@ export class ContractController {
   public getContractById = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { id } = req.params;
-      const contract = await this.contract.findContractById(id as any, (req as any).profile);
+      const profileId = (req as any).profile.id;
+      const contract = await this.contract.findContractById(id as any, profileId);
       if (!contract) throw new HttpException(404, "Contract doesn't exist");
       res.status(200).json(contract);
     } catch (error) {

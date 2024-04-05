@@ -16,7 +16,7 @@ export const AuthMiddleware = async (req, res: Response, next: NextFunction) => 
     if (!Authorization) next(new HttpException(404, 'Authentication token missing'));
 
     const profile: Profile = await Profile.findOne({ where: { id: Authorization || 0 } });
-    const profileId = profile?.id || profile?.dataValues?.id;
+    const profileId = profile?.id ? profile : profile?.dataValues;
     if (!profileId) return next(new HttpException(401, 'Wrong authentication token'));
 
     req.profile = profileId;
